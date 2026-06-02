@@ -4,399 +4,401 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <meta name="robots" content="noindex, nofollow" />
-<title>Merchant Center Onboarding — Compliance Intake</title>
+<title>Let's Get You Sorted ✨</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet" />
 <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
 <style>
   :root {
-    --bg: #0f1115;
-    --panel: #171a21;
-    --panel-2: #1d212b;
-    --border: #2a2f3a;
-    --text: #e7ebf2;
-    --muted: #9aa3b2;
-    --accent: #4f8cff;
-    --accent-soft: #1f2c47;
-    --danger: #ff6b6b;
-    --ok: #46d39a;
-    --radius: 12px;
+    --sage: #d6e0d3;
+    --sage-deep: #c7d4c4;
+    --accent: #6f9e7d;
+    --accent-dark: #5b8a69;
+    --accent-soft: #eef6f0;
+    --ink: #1f2933;
+    --muted: #8a93a0;
+    --line: #eceef0;
+    --field: #f6f8f7;
+    --field-line: #e4e8e6;
+    --danger: #e2725b;
+    --radius: 28px;
+    --radius-sm: 14px;
   }
   * { box-sizing: border-box; }
+  html, body { height: 100%; }
   body {
     margin: 0;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-    background: var(--bg);
-    color: var(--text);
-    line-height: 1.55;
-  }
-  .wrap { max-width: 860px; margin: 0 auto; padding: 40px 20px 80px; }
-  header.hero {
-    text-align: center;
-    padding: 28px 0 8px;
-  }
-  header.hero h1 { font-size: 1.9rem; margin: 0 0 8px; letter-spacing: -0.02em; }
-  header.hero p { color: var(--muted); max-width: 620px; margin: 0 auto; }
-  .note {
-    background: var(--accent-soft);
-    border: 1px solid #2c3c5e;
-    border-radius: var(--radius);
-    padding: 14px 18px;
-    margin: 24px 0;
-    font-size: 0.92rem;
-    color: #cdd9ef;
-  }
-  section.card {
-    background: var(--panel);
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    padding: 22px 22px 8px;
-    margin: 18px 0;
-  }
-  section.card h2 {
-    font-size: 1.1rem;
-    margin: 0 0 4px;
+    font-family: "Poppins", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    background: var(--sage);
+    color: var(--ink);
     display: flex;
     align-items: center;
-    gap: 10px;
-  }
-  section.card h2 .num {
-    background: var(--accent);
-    color: #fff;
-    font-size: 0.8rem;
-    width: 26px; height: 26px;
-    border-radius: 50%;
-    display: inline-flex;
-    align-items: center;
     justify-content: center;
-    flex: none;
+    padding: 28px 16px;
+    -webkit-font-smoothing: antialiased;
   }
-  section.card .why {
-    color: var(--muted);
-    font-size: 0.85rem;
-    margin: 0 0 16px;
-    border-left: 2px solid var(--border);
-    padding-left: 12px;
-  }
-  .field { margin-bottom: 16px; }
-  label.q { display: block; font-weight: 600; margin-bottom: 6px; font-size: 0.95rem; }
-  label.q .opt { color: var(--muted); font-weight: 400; font-size: 0.82rem; }
-  .hint { color: var(--muted); font-size: 0.82rem; margin: 2px 0 8px; }
-  input[type="text"], input[type="email"], input[type="tel"], input[type="url"], textarea, select {
+  .card {
     width: 100%;
-    background: var(--panel-2);
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    color: var(--text);
-    padding: 11px 12px;
-    font-size: 0.95rem;
-    font-family: inherit;
-  }
-  textarea { min-height: 84px; resize: vertical; }
-  input:focus, textarea:focus, select:focus { outline: none; border-color: var(--accent); }
-  .radios, .checks { display: flex; flex-wrap: wrap; gap: 8px; }
-  .radios label, .checks label {
-    background: var(--panel-2);
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    padding: 8px 12px;
-    font-size: 0.88rem;
-    cursor: pointer;
-    display: inline-flex;
-    gap: 7px;
-    align-items: center;
-  }
-  .radios input, .checks input { accent-color: var(--accent); }
-  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
-  @media (max-width: 620px) { .grid-2 { grid-template-columns: 1fr; } }
-  .req { color: var(--danger); }
-  .actions { margin-top: 26px; text-align: center; }
-  button.submit {
-    background: var(--accent);
-    color: #fff;
-    border: none;
-    border-radius: 10px;
-    padding: 14px 34px;
-    font-size: 1rem;
-    font-weight: 600;
-    cursor: pointer;
-  }
-  button.submit:disabled { opacity: 0.55; cursor: not-allowed; }
-  .hp { position: absolute; left: -9999px; top: -9999px; }
-  #status { margin-top: 16px; font-size: 0.92rem; min-height: 22px; }
-  #status.ok { color: var(--ok); }
-  #status.err { color: var(--danger); }
-  footer { text-align: center; color: var(--muted); font-size: 0.78rem; margin-top: 40px; }
-  .success-panel {
-    display: none;
-    text-align: center;
-    background: var(--panel);
-    border: 1px solid var(--ok);
+    max-width: 600px;
+    background: #fff;
     border-radius: var(--radius);
-    padding: 48px 28px;
+    box-shadow: 0 24px 60px rgba(40, 60, 45, 0.14);
+    padding: 30px 32px 26px;
   }
-  .success-panel h2 { color: var(--ok); }
+  @media (max-width: 520px) { .card { padding: 24px 20px 22px; } }
+
+  /* Header + progress */
+  .head { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+  .head h1 { font-size: 1.45rem; font-weight: 700; margin: 0; letter-spacing: -0.02em; }
+  .head .close { color: var(--muted); font-size: 1.4rem; line-height: 1; text-decoration: none; }
+  .progress-row { display: flex; align-items: center; gap: 12px; margin: 18px 0 6px; }
+  .rocket { font-size: 1.5rem; }
+  .track { flex: 1; height: 12px; background: #eef0f1; border-radius: 999px; overflow: hidden; }
+  .fill { height: 100%; width: 12%; background: var(--accent); border-radius: 999px; transition: width .45s cubic-bezier(.4,0,.2,1); }
+  .pct { font-weight: 600; color: var(--muted); font-size: .92rem; min-width: 42px; text-align: right; }
+  .step-label { color: var(--accent-dark); font-weight: 600; font-size: .82rem; letter-spacing: .03em; text-transform: uppercase; margin: 14px 0 2px; }
+
+  /* Steps */
+  .step { display: none; animation: pop .35s ease; }
+  .step.active { display: block; }
+  @keyframes pop { from { opacity: 0; transform: translateY(8px);} to { opacity: 1; transform: none; } }
+  .step h2 { font-size: 1.25rem; font-weight: 700; margin: 2px 0 4px; letter-spacing: -0.01em; }
+  .step .why { color: var(--muted); font-size: .9rem; margin: 0 0 18px; line-height: 1.5; }
+
+  .field { margin-bottom: 18px; }
+  label.q { display: block; font-weight: 600; font-size: .96rem; margin-bottom: 8px; }
+  label.q .opt { color: var(--muted); font-weight: 400; font-size: .82rem; }
+  .hint { color: var(--muted); font-size: .82rem; margin: 4px 0 0; }
+  .req { color: var(--accent-dark); }
+
+  input[type=text], input[type=email], input[type=tel], input[type=url], input[type=password], textarea, select {
+    width: 100%;
+    background: var(--field);
+    border: 1.5px solid var(--field-line);
+    border-radius: var(--radius-sm);
+    color: var(--ink);
+    padding: 13px 15px;
+    font-size: .96rem;
+    font-family: inherit;
+    transition: border-color .15s, background .15s;
+  }
+  textarea { min-height: 92px; resize: vertical; }
+  input:focus, textarea:focus, select:focus { outline: none; border-color: var(--accent); background: #fff; }
+  ::placeholder { color: #b3bbc2; }
+
+  /* Pill option selectors (radio / checkbox) */
+  .options { display: flex; flex-wrap: wrap; gap: 10px; }
+  .options.col { flex-direction: column; }
+  .option {
+    position: relative;
+    display: flex; align-items: center; gap: 10px;
+    background: var(--field);
+    border: 1.5px solid var(--field-line);
+    border-radius: var(--radius-sm);
+    padding: 12px 16px;
+    cursor: pointer;
+    font-size: .93rem;
+    font-weight: 500;
+    transition: all .15s;
+    flex: 1 1 auto;
+  }
+  .options.col .option { flex: 1 1 100%; }
+  .option input { position: absolute; opacity: 0; pointer-events: none; }
+  .option .dot {
+    width: 20px; height: 20px; border-radius: 50%;
+    border: 2px solid #cfd6d2; flex: none;
+    display: inline-flex; align-items: center; justify-content: center;
+    transition: all .15s;
+  }
+  .option.check .dot { border-radius: 6px; }
+  .option:has(input:checked) { border-color: var(--accent); background: var(--accent-soft); color: var(--accent-dark); }
+  .option:has(input:checked) .dot { border-color: var(--accent); background: var(--accent); }
+  .option:has(input:checked) .dot::after { content: ""; width: 8px; height: 8px; border-radius: 50%; background: #fff; }
+  .option.check:has(input:checked) .dot::after {
+    content: ""; width: 5px; height: 9px; border-radius: 0; background: transparent;
+    border: solid #fff; border-width: 0 2.5px 2.5px 0; transform: rotate(45deg) translateY(-1px);
+  }
+
+  /* Disclaimer / info boxes */
+  .info {
+    background: var(--accent-soft);
+    border: 1px solid #d6e8dc;
+    border-radius: var(--radius-sm);
+    padding: 14px 16px;
+    font-size: .87rem;
+    color: #41624e;
+    line-height: 1.5;
+    margin-bottom: 18px;
+  }
+  .info b { color: var(--accent-dark); }
+  .warn {
+    background: #fdf1ee; border: 1px solid #f6d8d0; color: #9c4a37;
+    border-radius: var(--radius-sm); padding: 12px 15px; font-size: .84rem; margin-top: 6px; line-height: 1.5;
+  }
+  .conditional { display: none; }
+  .conditional.show { display: block; animation: pop .3s ease; }
+
+  /* Nav */
+  .nav { display: flex; gap: 12px; margin-top: 26px; }
+  button { font-family: inherit; cursor: pointer; }
+  .btn {
+    border: none; border-radius: 999px; padding: 14px 26px; font-size: .98rem; font-weight: 600;
+    transition: transform .12s, background .15s, box-shadow .15s;
+  }
+  .btn:active { transform: scale(.97); }
+  .btn-primary { background: var(--accent); color: #fff; flex: 1; box-shadow: 0 8px 20px rgba(111,158,125,.35); }
+  .btn-primary:hover { background: var(--accent-dark); }
+  .btn-primary:disabled { opacity: .55; box-shadow: none; cursor: not-allowed; }
+  .btn-ghost { background: #fff; color: var(--ink); border: 1.5px solid var(--line); }
+  .btn-ghost:hover { background: #f7f8f9; }
+  .hp { position: absolute; left: -9999px; }
+  #status { margin-top: 12px; font-size: .9rem; min-height: 20px; text-align: center; }
+  #status.err { color: var(--danger); }
+
+  .cf-wrap { margin-top: 16px; display: flex; justify-content: center; }
+
+  /* Success */
+  .success { display: none; text-align: center; padding: 30px 10px 14px; }
+  .success .big { font-size: 3rem; }
+  .success h2 { color: var(--accent-dark); margin: 10px 0 6px; }
+  .success p { color: var(--muted); font-size: .95rem; }
 </style>
 </head>
 <body>
-<div class="wrap">
+<div class="card">
 
-  <header class="hero">
-    <h1>Merchant Center Compliance Onboarding</h1>
-    <p>This intake helps us fix the Google Merchant Center misrepresentation / policy issues blocking your store. Answer as completely as you can — accurate answers mean fewer review attempts (failed reviews trigger longer cool-downs).</p>
-  </header>
-
-  <div class="note">
-    🔒 Your answers are stored privately and used only to remediate your Merchant Center account. Fields marked <span class="req">*</span> are important. If you don't know an answer, leave it blank and add a note.
+  <div class="head">
+    <h1 id="title">Hey, let's get you sorted! 🎉</h1>
+    <a href="#" class="close" title="Close" onclick="return false;">×</a>
   </div>
 
-  <form id="onboarding-form" autocomplete="on">
+  <div class="progress-row">
+    <span class="rocket">🚀</span>
+    <div class="track"><div class="fill" id="fill"></div></div>
+    <span class="pct" id="pct">12%</span>
+  </div>
 
-    <!-- Honeypot anti-spam -->
+  <form id="form" autocomplete="on" novalidate>
+
     <div class="hp" aria-hidden="true">
-      <label>Leave this empty<input type="text" name="website_hp" tabindex="-1" autocomplete="off" /></label>
+      <label>Leave empty<input type="text" name="website_hp" tabindex="-1" autocomplete="off" /></label>
     </div>
 
-    <!-- Section 1 -->
-    <section class="card">
-      <h2><span class="num">1</span> Business Identity &amp; Legal Entity</h2>
-      <p class="why">Misrepresentation flags usually start here. Google wants a verifiable, consistent identity. Never claim an entity type (LLC/Corp) you aren't actually registered as.</p>
+    <!-- STEP 1 — Business basics -->
+    <section class="step active" data-title="🏢 Business basics">
+      <div class="step-label">Step 1 of 8</div>
+      <h2>🏢 Business basics</h2>
+      <p class="why">A clear, consistent business identity is what gets accounts approved. Tell us the essentials — no logo needed.</p>
+
       <div class="field">
-        <label class="q">Exact legal / registered business name <span class="req">*</span></label>
-        <input type="text" name="legal_name" placeholder="e.g., Onix Peptide LLC" required />
+        <label class="q">Your business name <span class="req">*</span></label>
+        <input type="text" name="legal_name" placeholder="The name your business operates under" required />
       </div>
+
       <div class="field">
-        <label class="q">Are you formally registered as that entity?</label>
-        <div class="radios">
-          <label><input type="radio" name="entity_registered" value="yes" /> Yes</label>
-          <label><input type="radio" name="entity_registered" value="no" /> No / not yet</label>
-          <label><input type="radio" name="entity_registered" value="unsure" /> Not sure</label>
+        <label class="q">Which country do you primarily serve? <span class="req">*</span></label>
+        <select name="country_served" id="country" required>
+          <option value="">Select a country…</option>
+          <option>United States</option>
+          <option>United Kingdom</option>
+          <option>Canada</option>
+          <option>Australia</option>
+          <option>European Union (EU / EEA)</option>
+          <option>India</option>
+          <option>Brazil</option>
+          <option>United Arab Emirates</option>
+          <option>Singapore</option>
+          <option>Other / Multiple countries</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label class="q">Are you registered as a business in that country?</label>
+        <div class="options" id="reg-radios">
+          <label class="option"><input type="radio" name="registered_in_country" value="Yes" /><span class="dot"></span>Yes</label>
+          <label class="option"><input type="radio" name="registered_in_country" value="No / not yet" /><span class="dot"></span>No / not yet</label>
+          <label class="option"><input type="radio" name="registered_in_country" value="Not sure" /><span class="dot"></span>Not sure</label>
         </div>
-        <p class="hint">If No → we must remove "LLC/Inc" everywhere on the site.</p>
       </div>
-      <div class="field">
-        <label class="q">Registration number &amp; state/country <span class="opt">(if registered)</span></label>
-        <input type="text" name="entity_reg_details" placeholder="e.g., AL LLC #12345678" />
-      </div>
-      <div class="field">
-        <label class="q">Brand / trade name shown on the storefront &amp; logo <span class="req">*</span></label>
-        <input type="text" name="brand_name" placeholder="e.g., Onix Peptide" required />
-        <p class="hint">Singular or plural? Pick ONE spelling and we'll use it everywhere.</p>
+
+      <div class="field conditional" id="reg-number-wrap">
+        <label class="q">Business registration number <span class="opt">(optional)</span></label>
+        <input type="text" name="reg_number" placeholder="e.g., company / LLC registration no." />
+        <p class="hint">Only if you have it handy — helps us verify your identity faster.</p>
       </div>
     </section>
 
-    <!-- Section 2 -->
-    <section class="card">
-      <h2><span class="num">2</span> Address, Phone &amp; Hours</h2>
-      <p class="why">Address/phone must match across Merchant Center, the website, and any listings. Mismatches read as misrepresentation.</p>
+    <!-- STEP 2 — Address & phone -->
+    <section class="step" data-title="📍 Address & phone">
+      <div class="step-label">Step 2 of 8</div>
+      <h2>📍 Address &amp; phone</h2>
+      <p class="why">This must be real and match what's on your store and Merchant Center — mismatches get flagged.</p>
+
       <div class="field">
-        <label class="q">Full public business address <span class="req">*</span></label>
-        <textarea name="address" placeholder="Street, City, State, ZIP, Country" required></textarea>
-        <p class="hint">Must be real and verifiable, and you must be comfortable displaying it publicly.</p>
+        <label class="q">Public business address <span class="req">*</span></label>
+        <textarea name="address" placeholder="Street, City, State/Region, ZIP, Country" required></textarea>
+        <p class="hint">Must be verifiable and OK to display publicly.</p>
       </div>
-      <div class="grid-2">
-        <div class="field">
-          <label class="q">Public business phone <span class="req">*</span></label>
-          <input type="tel" name="phone" placeholder="+1 (205) 238-0707" required />
-        </div>
-        <div class="field">
-          <label class="q">Business hours (with timezone)</label>
-          <input type="text" name="hours" placeholder="Mon–Fri 9 AM – 5 PM CST" />
-        </div>
+      <div class="field">
+        <label class="q">Public business phone <span class="req">*</span></label>
+        <input type="tel" name="phone" placeholder="+1 555 000 0000" required />
+      </div>
+      <div class="field">
+        <label class="q">Business hours <span class="opt">(with timezone)</span></label>
+        <input type="text" name="hours" placeholder="e.g., Mon–Fri 9 AM – 5 PM EST" />
       </div>
     </section>
 
-    <!-- Section 3 -->
-    <section class="card">
-      <h2><span class="num">3</span> Contact Email (standardized)</h2>
-      <p class="why">A single, working customer email must appear everywhere. Mixed addresses (info@ vs support@) are themselves a flag, and Google may test the inbox.</p>
+    <!-- STEP 3 — Contact email -->
+    <section class="step" data-title="✉️ Contact email">
+      <div class="step-label">Step 3 of 8</div>
+      <h2>✉️ Contact email</h2>
+      <p class="why">One working customer email, used everywhere. Mixed addresses across your site are a red flag.</p>
+
       <div class="field">
-        <label class="q">The ONE customer-facing email to use everywhere <span class="req">*</span></label>
+        <label class="q">Customer-facing email <span class="req">*</span></label>
         <input type="email" name="contact_email" placeholder="support@yourdomain.com" required />
       </div>
       <div class="field">
-        <label class="q">Is that inbox monitored and able to reply?</label>
-        <div class="radios">
-          <label><input type="radio" name="inbox_monitored" value="yes" /> Yes</label>
-          <label><input type="radio" name="inbox_monitored" value="no" /> Not yet</label>
+        <label class="q">Is this inbox monitored &amp; able to reply?</label>
+        <div class="options">
+          <label class="option"><input type="radio" name="inbox_monitored" value="Yes" /><span class="dot"></span>Yes</label>
+          <label class="option"><input type="radio" name="inbox_monitored" value="Not yet" /><span class="dot"></span>Not yet</label>
         </div>
       </div>
     </section>
 
-    <!-- Section 4 -->
-    <section class="card">
-      <h2><span class="num">4</span> Policy Pages</h2>
-      <p class="why">Thin, missing, contradictory, or hostile policies are core misrepresentation triggers (e.g., threat language in Returns).</p>
+    <!-- STEP 4 — Policy pages -->
+    <section class="step" data-title="📄 Policy pages">
+      <div class="step-label">Step 4 of 8</div>
+      <h2>📄 Policy pages</h2>
+      <p class="why">Just tick which pages your site already has — no links needed.</p>
+
       <div class="field">
-        <label class="q">Which policy pages exist &amp; are published? Paste links.</label>
-        <textarea name="policy_links" placeholder="Terms: ...&#10;Privacy: ...&#10;Shipping: ...&#10;Returns/Refund: ...&#10;Contact: ...&#10;Disclaimer: ...&#10;About: ..."></textarea>
+        <label class="q">Which of these pages exist on your site?</label>
+        <div class="options col">
+          <label class="option check"><input type="checkbox" name="policy_pages_present" value="Terms of Service" /><span class="dot"></span>Terms of Service</label>
+          <label class="option check"><input type="checkbox" name="policy_pages_present" value="Privacy Policy" /><span class="dot"></span>Privacy Policy</label>
+          <label class="option check"><input type="checkbox" name="policy_pages_present" value="Shipping Information" /><span class="dot"></span>Shipping Information</label>
+          <label class="option check"><input type="checkbox" name="policy_pages_present" value="Contact Us" /><span class="dot"></span>Contact Us</label>
+          <label class="option check"><input type="checkbox" name="policy_pages_present" value="Return & Refund" /><span class="dot"></span>Return &amp; Refund</label>
+          <label class="option check"><input type="checkbox" name="policy_pages_present" value="Disclaimer" /><span class="dot"></span>Disclaimer</label>
+        </div>
       </div>
+
+      <div class="info">
+        ✍️ <b>What we'll do:</b> we'll tweak these policy pages for you — adding your business address and contact info to every page, with clear instructions. If we need to change the actual wording, <b>we'll send it to you for approval first</b>. Nothing goes live without your okay.
+      </div>
+
       <div class="field">
         <label class="q">Real shipping details</label>
-        <textarea name="shipping_details" placeholder="Rates, carriers, regions served, delivery timeframes (e.g., $15 std / $30 expedited / free over $200)"></textarea>
+        <textarea name="shipping_details" placeholder="Rates, carriers, regions served, delivery times (e.g., $15 standard / $30 express / free over $200)"></textarea>
       </div>
       <div class="field">
-        <label class="q">Actual return / refund policy</label>
-        <textarea name="returns_details" placeholder="Window length, restocking fees, conditions"></textarea>
+        <label class="q">Your actual return / refund policy</label>
+        <textarea name="returns_details" placeholder="Return window, restocking fees, conditions"></textarea>
       </div>
+
       <div class="field">
-        <label class="q">Privacy / legal applicability</label>
-        <div class="checks">
-          <label><input type="checkbox" name="privacy_flags" value="CCPA (California buyers)" /> CCPA (California buyers)</label>
-          <label><input type="checkbox" name="privacy_flags" value="COPPA (under-13)" /> COPPA (under 13)</label>
-          <label><input type="checkbox" name="privacy_flags" value="Arbitration clause" /> Arbitration clause</label>
+        <label class="q">Privacy laws that may apply <span class="opt">(based on your country)</span></label>
+        <div class="options col" id="privacy-options"><!-- built from selected country --></div>
+        <textarea name="privacy_other" placeholder="Other regions you sell to, or anything specific — optional" style="margin-top:10px;"></textarea>
+        <p class="hint">Privacy requirements differ by country. We've pre-selected the likely ones — adjust as needed.</p>
+      </div>
+    </section>
+
+    <!-- STEP 5 — Product names / eligibility -->
+    <section class="step" data-title="🏷️ Product names">
+      <div class="step-label">Step 5 of 8</div>
+      <h2>🏷️ Product names &amp; eligibility</h2>
+      <p class="why">Some product names simply can't be advertised and will always be rejected. Here's how we'd like to handle them.</p>
+
+      <div class="field">
+        <label class="q">Are you OK if we rename the non-eligible products and give them new, safe URLs?</label>
+        <p class="hint" style="margin:0 0 8px;">Some names can't run at all, so we'd switch them to compliant alternatives.</p>
+        <div class="options">
+          <label class="option"><input type="radio" name="rename_ok" value="Yes — rename + new URLs" /><span class="dot"></span>Yes, go ahead</label>
+          <label class="option"><input type="radio" name="rename_ok" value="No" /><span class="dot"></span>No</label>
+        </div>
+      </div>
+
+      <div class="conditional" id="rename-yes">
+        <div class="info">🙌 Perfect — we'll take care of the renaming and new URLs for you. That's all we need here.</div>
+      </div>
+
+      <div class="conditional field" id="rename-no">
+        <label class="q">No problem — then how should we handle those non-eligible products?</label>
+        <div class="options col">
+          <label class="option"><input type="radio" name="handling_choice" value="New safe names so they show in the feed" /><span class="dot"></span>Give them new safe names so they can still show in the feed</label>
+          <label class="option"><input type="radio" name="handling_choice" value="Blacklist from Merchant Center (hidden from feed)" /><span class="dot"></span>Blacklist them from Merchant Center (hidden from the feed)</label>
+          <label class="option"><input type="radio" name="handling_choice" value="Leave as-is (stay as disapproved items)" /><span class="dot"></span>Leave them as-is (they'll keep showing as disapproved)</label>
         </div>
       </div>
     </section>
 
-    <!-- Section 5 -->
-    <section class="card">
-      <h2><span class="num">5</span> Product Data, Naming &amp; Restricted Compounds</h2>
-      <p class="why">The deepest peptide-specific risk. Google flags INN/drug names in titles AND slugs, plus restricted compounds visible anywhere — even if blocked from the feed.</p>
-      <div class="field">
-        <label class="q">Link to your full product list / shop page <span class="req">*</span></label>
-        <input type="url" name="shop_url" placeholder="https://yourdomain.com/shop" required />
-      </div>
-      <div class="field">
-        <label class="q">Do any product TITLES still contain raw drug/INN names?</label>
-        <div class="radios">
-          <label><input type="radio" name="titles_inn" value="yes" /> Yes</label>
-          <label><input type="radio" name="titles_inn" value="no" /> No</label>
-          <label><input type="radio" name="titles_inn" value="unsure" /> Not sure</label>
-        </div>
-        <p class="hint">e.g., Tirzepatide, Retatrutide, Tesamorelin, Sermorelin, Cagrilintide, Semaglutide</p>
-      </div>
-      <div class="field">
-        <label class="q">Do any product URLs / slugs contain those names?</label>
-        <div class="radios">
-          <label><input type="radio" name="slugs_inn" value="yes" /> Yes</label>
-          <label><input type="radio" name="slugs_inn" value="no" /> No</label>
-          <label><input type="radio" name="slugs_inn" value="unsure" /> Not sure</label>
-        </div>
-        <p class="hint">e.g., /product/tirzepatide-20mg/ — slugs matter too, not just titles.</p>
-      </div>
-      <div class="field">
-        <label class="q">Which restricted compounds are still VISIBLE on the website? <span class="opt">(check all shown)</span></label>
-        <div class="checks">
-          <label><input type="checkbox" name="restricted_visible" value="BPC-157" /> BPC-157</label>
-          <label><input type="checkbox" name="restricted_visible" value="TB-500" /> TB-500</label>
-          <label><input type="checkbox" name="restricted_visible" value="TA-1" /> TA-1</label>
-          <label><input type="checkbox" name="restricted_visible" value="HCG" /> HCG</label>
-          <label><input type="checkbox" name="restricted_visible" value="MT-2" /> MT-2</label>
-          <label><input type="checkbox" name="restricted_visible" value="MOTS-c" /> MOTS-c</label>
-          <label><input type="checkbox" name="restricted_visible" value="IGF-1 LR3" /> IGF-1 LR3</label>
-          <label><input type="checkbox" name="restricted_visible" value="Epithalon" /> Epithalon</label>
-          <label><input type="checkbox" name="restricted_visible" value="Enclomiphene" /> Enclomiphene</label>
-          <label><input type="checkbox" name="restricted_visible" value="DSIP" /> DSIP</label>
-          <label><input type="checkbox" name="restricted_visible" value="Other" /> Other</label>
-        </div>
-      </div>
-    </section>
+    <!-- STEP 6 — Research-use framing -->
+    <section class="step" data-title="🔬 Research-use framing">
+      <div class="step-label">Step 6 of 8</div>
+      <h2>🔬 Research-use framing</h2>
+      <p class="why">Your store's framing must stay consistent — no human-use or health-benefit claims.</p>
 
-    <!-- Section 6 -->
-    <section class="card">
-      <h2><span class="num">6</span> Product Images &amp; Labels</h2>
-      <p class="why">Google's image classifier reads vial labels — restricted names on photos get flagged even when the text is clean.</p>
-      <div class="field">
-        <label class="q">Do any product photos / vial labels show restricted compound names?</label>
-        <div class="radios">
-          <label><input type="radio" name="images_restricted" value="yes" /> Yes</label>
-          <label><input type="radio" name="images_restricted" value="no" /> No</label>
-          <label><input type="radio" name="images_restricted" value="unsure" /> Not sure</label>
-        </div>
-      </div>
-      <div class="field">
-        <label class="q">Can you supply clean / relabeled images?</label>
-        <div class="radios">
-          <label><input type="radio" name="images_clean_available" value="yes" /> Yes</label>
-          <label><input type="radio" name="images_clean_available" value="no" /> No</label>
-        </div>
-      </div>
-    </section>
-
-    <!-- Section 7 -->
-    <section class="card">
-      <h2><span class="num">7</span> Research-Use Framing</h2>
-      <p class="why">Human-use / dosing / health-benefit claims contradict a "research only" store — Google penalizes the contradiction.</p>
       <div class="field">
         <label class="q">Do you have a clear "Research Use Only / Not for Human Consumption" disclaimer?</label>
-        <div class="radios">
-          <label><input type="radio" name="research_disclaimer" value="yes" /> Yes</label>
-          <label><input type="radio" name="research_disclaimer" value="no" /> No</label>
+        <div class="options">
+          <label class="option"><input type="radio" name="research_disclaimer" value="Yes" /><span class="dot"></span>Yes</label>
+          <label class="option"><input type="radio" name="research_disclaimer" value="No" /><span class="dot"></span>No</label>
         </div>
       </div>
       <div class="field">
-        <label class="q">Where is it shown?</label>
-        <input type="text" name="research_disclaimer_where" placeholder="Product pages, footer, checkout, etc." />
-      </div>
-      <div class="field">
-        <label class="q">Does any copy imply human use, dosing, or health benefits?</label>
-        <div class="radios">
-          <label><input type="radio" name="human_use_copy" value="yes" /> Yes</label>
-          <label><input type="radio" name="human_use_copy" value="no" /> No</label>
-          <label><input type="radio" name="human_use_copy" value="unsure" /> Not sure</label>
+        <label class="q">Does any copy on your site imply human use, dosing, or health benefits?</label>
+        <div class="options">
+          <label class="option"><input type="radio" name="human_use_copy" value="Yes" /><span class="dot"></span>Yes</label>
+          <label class="option"><input type="radio" name="human_use_copy" value="No" /><span class="dot"></span>No</label>
+          <label class="option"><input type="radio" name="human_use_copy" value="Not sure" /><span class="dot"></span>Not sure</label>
         </div>
       </div>
     </section>
 
-    <!-- Section 8 -->
-    <section class="card">
-      <h2><span class="num">8</span> Trust Signals</h2>
-      <p class="why">No trust signals makes a new peptide store look like a scam to reviewers.</p>
+    <!-- STEP 7 — Trust & social -->
+    <section class="step" data-title="⭐ Trust & social">
+      <div class="step-label">Step 7 of 8</div>
+      <h2>⭐ Trust &amp; social</h2>
+      <p class="why">Trust signals reassure both customers and reviewers that you're legit.</p>
+
       <div class="field">
-        <label class="q">What trust signals are on the site? <span class="opt">(check all present)</span></label>
-        <div class="checks">
-          <label><input type="checkbox" name="trust_signals" value="Customer reviews" /> Customer reviews</label>
-          <label><input type="checkbox" name="trust_signals" value="Testimonials" /> Testimonials</label>
-          <label><input type="checkbox" name="trust_signals" value="Trustpilot" /> Trustpilot</label>
-          <label><input type="checkbox" name="trust_signals" value="Trust badges" /> Trust/security badges</label>
-          <label><input type="checkbox" name="trust_signals" value="SSL / secure checkout" /> SSL / secure checkout</label>
-          <label><input type="checkbox" name="trust_signals" value="None" /> None yet</label>
+        <label class="q">Which trust signals are on your site?</label>
+        <div class="options col">
+          <label class="option check"><input type="checkbox" name="trust_signals" value="Customer reviews" /><span class="dot"></span>Customer reviews</label>
+          <label class="option check"><input type="checkbox" name="trust_signals" value="Trustpilot" /><span class="dot"></span>Trustpilot</label>
+          <label class="option check"><input type="checkbox" name="trust_signals" value="Trust / security badges" /><span class="dot"></span>Trust / security badges</label>
+          <label class="option check"><input type="checkbox" name="trust_signals" value="SSL / secure checkout" /><span class="dot"></span>SSL / secure checkout</label>
+          <label class="option check"><input type="checkbox" name="trust_signals" value="None yet" /><span class="dot"></span>None yet</label>
+        </div>
+      </div>
+
+      <div class="field">
+        <label class="q">Do you have social media accounts?</label>
+        <div class="options">
+          <label class="option"><input type="radio" name="has_social" value="Yes" /><span class="dot"></span>Yes</label>
+          <label class="option"><input type="radio" name="has_social" value="No" /><span class="dot"></span>No</label>
+        </div>
+      </div>
+      <div class="field conditional" id="social-active">
+        <label class="q">Are they active / regularly working?</label>
+        <div class="options">
+          <label class="option"><input type="radio" name="social_active" value="Yes, active" /><span class="dot"></span>Yes, active</label>
+          <label class="option"><input type="radio" name="social_active" value="Not really" /><span class="dot"></span>Not really</label>
         </div>
       </div>
     </section>
 
-    <!-- Section 9 -->
-    <section class="card">
-      <h2><span class="num">9</span> Merchant Center &amp; Case Status</h2>
-      <p class="why">We need the account state to plan timing and avoid wasting a review attempt.</p>
-      <div class="grid-2">
-        <div class="field">
-          <label class="q">Merchant Center account ID</label>
-          <input type="text" name="mc_account_id" placeholder="e.g., 5782165626" />
-        </div>
-        <div class="field">
-          <label class="q">Google Ads Customer ID</label>
-          <input type="text" name="ads_customer_id" placeholder="e.g., 432-664-1780" />
-        </div>
-      </div>
-      <div class="field">
-        <label class="q">Current account status</label>
-        <div class="radios">
-          <label><input type="radio" name="account_status" value="suspended_misrep" /> Suspended — Misrepresentation</label>
-          <label><input type="radio" name="account_status" value="suspended_other" /> Suspended — other</label>
-          <label><input type="radio" name="account_status" value="warning" /> Warning only</label>
-          <label><input type="radio" name="account_status" value="active" /> Active</label>
-        </div>
-      </div>
-      <div class="grid-2">
-        <div class="field">
-          <label class="q">In a cool-down period? When does it end?</label>
-          <input type="text" name="cooldown" placeholder="e.g., ends 2026-05-28 / not sure" />
-        </div>
-        <div class="field">
-          <label class="q">How many re-reviews already failed?</label>
-          <input type="text" name="failed_reviews" placeholder="e.g., 1" />
-        </div>
-      </div>
-      <div class="field">
-        <label class="q">Open support case ID <span class="opt">(if any)</span></label>
-        <input type="text" name="case_id" placeholder="e.g., 3-6976000041583" />
-      </div>
-    </section>
+    <!-- STEP 8 — Site access -->
+    <section class="step" data-title="🔑 Site access">
+      <div class="step-label">Step 8 of 8</div>
+      <h2>🔑 Site access</h2>
+      <p class="why">To make and verify the fixes, we'll need admin access to your store.</p>
 
-    <!-- Section 10 -->
-    <section class="card">
-      <h2><span class="num">10</span> Site Access &amp; Technical</h2>
-      <p class="why">We need access to actually make and verify the fixes.</p>
       <div class="field">
         <label class="q">Store platform <span class="req">*</span></label>
         <select name="platform" required>
@@ -410,126 +412,197 @@
         </select>
       </div>
       <div class="field">
-        <label class="q">Can you grant admin / editor (or staging) access?</label>
-        <div class="radios">
-          <label><input type="radio" name="access_grant" value="yes" /> Yes</label>
-          <label><input type="radio" name="access_grant" value="staging" /> Staging only</label>
-          <label><input type="radio" name="access_grant" value="no" /> No</label>
-        </div>
-      </div>
-      <div class="field">
-        <label class="q">How is the product feed generated?</label>
-        <input type="text" name="feed_method" placeholder="Manual upload, plugin, app, API…" />
-      </div>
-      <div class="field">
-        <label class="q">Store domain <span class="req">*</span></label>
+        <label class="q">Store website URL <span class="req">*</span></label>
         <input type="url" name="domain" placeholder="https://yourdomain.com" required />
       </div>
+
+      <div class="info">🔐 We need <b>admin access</b> to make the fixes. Please share a login below.</div>
+
+      <div class="field">
+        <label class="q">Admin username / email</label>
+        <input type="text" name="access_username" placeholder="Admin login username or email" autocomplete="off" />
+      </div>
+      <div class="field">
+        <label class="q">Admin password</label>
+        <input type="password" name="access_password" placeholder="Admin password" autocomplete="off" />
+        <div class="warn">💡 Tip: for safety, create a <b>temporary admin/editor account</b> just for us — you can delete it the moment we're done. We only use it to fix your store.</div>
+      </div>
+
       <div class="field">
         <label class="q">Anything else we should know?</label>
-        <textarea name="notes" placeholder="Context, deadlines, prior agency work, etc."></textarea>
+        <textarea name="notes" placeholder="Deadlines, prior agency work, special notes…"></textarea>
+      </div>
+
+      <div class="cf-wrap">
+        <div class="cf-turnstile" data-sitekey="YOUR_TURNSTILE_SITE_KEY"></div>
       </div>
     </section>
 
-    <div class="actions">
-      <!-- Cloudflare Turnstile widget. Replace data-sitekey with your real site key. -->
-      <div class="cf-turnstile" data-sitekey="YOUR_TURNSTILE_SITE_KEY" data-theme="dark" style="display:inline-block;margin-bottom:16px;"></div>
-      <br />
-      <button type="submit" class="submit" id="submitBtn">Submit onboarding</button>
-      <div id="status" role="status" aria-live="polite"></div>
+    <div class="nav">
+      <button type="button" class="btn btn-ghost" id="backBtn" style="display:none;">← Back</button>
+      <button type="button" class="btn btn-primary" id="nextBtn">Continue →</button>
     </div>
+    <div id="status" role="status" aria-live="polite"></div>
   </form>
 
-  <div class="success-panel" id="successPanel">
-    <h2>✓ Submitted — thank you!</h2>
-    <p>Your onboarding details have been received. We'll review your store and reply at the email you provided with the remediation plan and next steps.</p>
+  <div class="success" id="success">
+    <div class="big">🎉</div>
+    <h2>You're all set!</h2>
+    <p>Thanks — we've received everything. We'll review your store and email you the remediation plan and next steps.</p>
   </div>
-
-  <footer>Confidential intake · Used solely for Merchant Center remediation.</footer>
 </div>
 
 <script>
-  // ====== CONFIG: set this to your deployed Worker / function URL ======
+  // ====== CONFIG: set after deploying the Worker ======
   const SUBMIT_ENDPOINT = "https://YOUR-WORKER-SUBDOMAIN.workers.dev/submit";
-  // =====================================================================
+  // =====================================================
 
-  const form = document.getElementById("onboarding-form");
+  // Privacy laws by country
+  const PRIVACY = {
+    "United States": ["CCPA / CPRA (California residents)", "COPPA (users under 13)", "Other US state laws (VA, CO, CT…)"],
+    "United Kingdom": ["UK GDPR", "Data Protection Act 2018", "PECR (cookies / marketing)"],
+    "Canada": ["PIPEDA", "CASL (anti-spam)"],
+    "Australia": ["Privacy Act 1988 / APPs", "Spam Act 2003"],
+    "European Union (EU / EEA)": ["GDPR", "ePrivacy / cookie consent"],
+    "India": ["DPDP Act 2023"],
+    "Brazil": ["LGPD"],
+    "United Arab Emirates": ["UAE PDPL"],
+    "Singapore": ["PDPA"],
+    "Other / Multiple countries": []
+  };
+
+  const form = document.getElementById("form");
+  const steps = Array.from(form.querySelectorAll(".step"));
+  const fill = document.getElementById("fill");
+  const pct = document.getElementById("pct");
+  const backBtn = document.getElementById("backBtn");
+  const nextBtn = document.getElementById("nextBtn");
   const statusEl = document.getElementById("status");
-  const btn = document.getElementById("submitBtn");
-  const successPanel = document.getElementById("successPanel");
+  const titleEl = document.getElementById("title");
+  let i = 0;
+
+  function render() {
+    steps.forEach((s, idx) => s.classList.toggle("active", idx === i));
+    const p = Math.round(((i + 1) / steps.length) * 100);
+    fill.style.width = p + "%";
+    pct.textContent = p + "%";
+    backBtn.style.display = i === 0 ? "none" : "block";
+    nextBtn.textContent = i === steps.length - 1 ? "Submit ✨" : "Continue →";
+    statusEl.textContent = "";
+    if (i === steps.length - 1) titleEl.textContent = "Last step — almost there! 🙌";
+    else if (i === 0) titleEl.textContent = "Hey, let's get you sorted! 🎉";
+    else titleEl.textContent = "Looking great — keep going! 👏";
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }
+
+  function validateStep() {
+    const active = steps[i];
+    const fields = active.querySelectorAll("input[required], select[required], textarea[required]");
+    for (const f of fields) {
+      if (f.offsetParent === null) continue; // skip hidden
+      if (!f.checkValidity()) { f.reportValidity(); return false; }
+    }
+    return true;
+  }
+
+  // --- Conditional logic ---
+  // Reg number shows only if registered = Yes
+  form.querySelectorAll('input[name="registered_in_country"]').forEach(r =>
+    r.addEventListener("change", () => {
+      document.getElementById("reg-number-wrap").classList.toggle("show", r.value === "Yes" && r.checked);
+    })
+  );
+  // Rename branching
+  form.querySelectorAll('input[name="rename_ok"]').forEach(r =>
+    r.addEventListener("change", () => {
+      const yes = form.querySelector('input[name="rename_ok"][value="Yes — rename + new URLs"]').checked;
+      document.getElementById("rename-yes").classList.toggle("show", yes);
+      document.getElementById("rename-no").classList.toggle("show", !yes);
+    })
+  );
+  // Social active shows only if has_social = Yes
+  form.querySelectorAll('input[name="has_social"]').forEach(r =>
+    r.addEventListener("change", () => {
+      document.getElementById("social-active").classList.toggle("show", r.value === "Yes" && r.checked);
+    })
+  );
+
+  // Build privacy options from chosen country (rebuilt when step 4 opens)
+  function buildPrivacy() {
+    const country = document.getElementById("country").value;
+    const box = document.getElementById("privacy-options");
+    const list = PRIVACY[country] || [];
+    box.innerHTML = "";
+    if (!list.length) {
+      box.innerHTML = '<p class="hint" style="margin:0;">Add the regions / laws relevant to you in the box below.</p>';
+      return;
+    }
+    list.forEach(law => {
+      const lbl = document.createElement("label");
+      lbl.className = "option check";
+      lbl.innerHTML = '<input type="checkbox" name="privacy_flags" value="' + law + '" checked /><span class="dot"></span>' + law;
+      box.appendChild(lbl);
+    });
+  }
+
+  nextBtn.addEventListener("click", () => {
+    if (!validateStep()) return;
+    if (i < steps.length - 1) {
+      i++;
+      if (steps[i].dataset.title.includes("Policy")) buildPrivacy();
+      render();
+    } else {
+      submitForm();
+    }
+  });
+  backBtn.addEventListener("click", () => { if (i > 0) { i--; render(); } });
 
   function collect() {
     const data = {};
     const fd = new FormData(form);
     for (const [key, value] of fd.entries()) {
-      if (key === "website_hp") continue; // honeypot handled separately
+      if (key === "website_hp") continue;
       if (data[key] !== undefined) {
-        // multi-value (checkboxes)
         if (!Array.isArray(data[key])) data[key] = [data[key]];
         data[key].push(value);
-      } else {
-        data[key] = value;
-      }
+      } else data[key] = value;
     }
     return data;
   }
 
-  form.addEventListener("submit", async (e) => {
-    e.preventDefault();
-
-    // Honeypot: if filled, silently pretend success (bot)
+  async function submitForm() {
     if (form.elements["website_hp"] && form.elements["website_hp"].value) {
-      form.style.display = "none";
-      successPanel.style.display = "block";
-      return;
+      form.style.display = "none"; document.getElementById("success").style.display = "block"; return;
     }
+    let token = "";
+    if (window.turnstile && turnstile.getResponse) token = turnstile.getResponse() || "";
+    else { const h = form.querySelector('input[name="cf-turnstile-response"]'); token = h ? h.value : ""; }
+    if (!token) { statusEl.className = "err"; statusEl.textContent = "Please complete the verification check first."; return; }
 
-    if (!form.reportValidity()) return;
-
-    // Cloudflare Turnstile: require a token before submitting.
-    let turnstileToken = "";
-    if (window.turnstile && typeof window.turnstile.getResponse === "function") {
-      turnstileToken = window.turnstile.getResponse() || "";
-    } else {
-      const hidden = form.querySelector('input[name="cf-turnstile-response"]');
-      turnstileToken = hidden ? hidden.value : "";
-    }
-    if (!turnstileToken) {
-      statusEl.className = "err";
-      statusEl.textContent = "Please complete the verification checkbox before submitting.";
-      return;
-    }
-
-    btn.disabled = true;
+    nextBtn.disabled = true;
     statusEl.className = "";
-    statusEl.textContent = "Submitting…";
-
-    const payload = {
-      submitted_at: new Date().toISOString(),
-      turnstile_token: turnstileToken,
-      data: collect(),
-    };
+    statusEl.textContent = "Sending…";
 
     try {
       const res = await fetch(SUBMIT_ENDPOINT, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload),
+        body: JSON.stringify({ submitted_at: new Date().toISOString(), turnstile_token: token, data: collect() })
       });
       if (!res.ok) throw new Error("HTTP " + res.status);
       form.style.display = "none";
-      successPanel.style.display = "block";
-      window.scrollTo({ top: 0, behavior: "smooth" });
-    } catch (err) {
+      document.getElementById("success").style.display = "block";
+      titleEl.textContent = "All done! 🎉";
+      fill.style.width = "100%"; pct.textContent = "100%";
+    } catch (e) {
       statusEl.className = "err";
-      statusEl.textContent =
-        "Something went wrong submitting the form. Please try again, or email us your answers directly.";
-      btn.disabled = false;
-      if (window.turnstile && typeof window.turnstile.reset === "function") {
-        window.turnstile.reset();
-      }
+      statusEl.textContent = "Something went wrong — please try again, or email us your answers.";
+      nextBtn.disabled = false;
+      if (window.turnstile && turnstile.reset) turnstile.reset();
     }
-  });
+  }
+
+  render();
 </script>
 </body>
 </html>
