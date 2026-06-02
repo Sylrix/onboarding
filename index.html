@@ -411,8 +411,11 @@
 
   <div class="success" id="success">
     <div class="tick"></div>
-    <h2>You're all set</h2>
-    <p>Thanks — we've received everything. We'll review your store and reach out with the next steps.</p>
+    <h2>Thank you — you're all set</h2>
+    <p>We've received everything. We'll review your store and reach out with the next steps.</p>
+    <div class="info" style="text-align:left;margin-top:22px;">
+      <b>Please note:</b> as you're aware, not all products will be shown as approved in Google Merchant Center. Certain compounds cannot be advertised under Google's policies, so a portion of your catalog may remain disapproved or be excluded from the feed even after we complete the remediation. We'll get the maximum eligible products live for you.
+    </div>
   </div>
 </div>
 
@@ -560,11 +563,15 @@
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ submitted_at: new Date().toISOString(), turnstile_token: token, data: collect() })
       });
-      if (!res.ok) throw new Error("HTTP " + res.status);
+      if (!res.ok) {
+        let msg = "HTTP " + res.status;
+        try { const j = await res.json(); if (j && j.error) msg = j.error + (j.detail ? " — " + j.detail : ""); } catch (_) {}
+        throw new Error(msg);
+      }
       showSuccess();
     } catch (e) {
       statusEl.className = "err";
-      statusEl.textContent = "Something went wrong — please try again, or contact us directly.";
+      statusEl.textContent = "Couldn't submit: " + (e.message || "unknown error") + ". Please try again.";
       nextBtn.disabled = false;
       if (window.turnstile && turnstile.reset) turnstile.reset();
     }
