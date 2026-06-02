@@ -4,185 +4,185 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <meta name="robots" content="noindex, nofollow" />
-<title>Let's Get You Sorted ✨</title>
+<title>Client Onboarding</title>
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
 <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
 <style>
   :root {
-    --sage: #d6e0d3;
-    --sage-deep: #c7d4c4;
-    --accent: #6f9e7d;
-    --accent-dark: #5b8a69;
-    --accent-soft: #eef6f0;
-    --ink: #1f2933;
-    --muted: #8a93a0;
-    --line: #eceef0;
-    --field: #f6f8f7;
-    --field-line: #e4e8e6;
-    --danger: #e2725b;
-    --radius: 28px;
-    --radius-sm: 14px;
+    --bg: #edf0ec;
+    --card: #ffffff;
+    --ink: #1b211d;
+    --muted: #7a827c;
+    --line: #e8ebe8;
+    --field: #f6f8f6;
+    --field-line: #e4e8e4;
+    --accent: #5f9070;
+    --accent-dark: #4d7a5d;
+    --accent-soft: #ecf4ee;
+    --danger: #c4674f;
+    --r: 20px;
+    --rs: 12px;
+    --ease: cubic-bezier(.22,.61,.36,1);
   }
   * { box-sizing: border-box; }
   body {
     margin: 0;
     min-height: 100vh;
-    font-family: "Poppins", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-    background: var(--sage);
+    font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    background: var(--bg);
     color: var(--ink);
-    padding: 22px 16px;       /* normal top-down flow: card sits at top, page scrolls, never clips */
+    padding: 28px 16px;
+    line-height: 1.55;
     -webkit-font-smoothing: antialiased;
   }
   .card {
     width: 100%;
-    max-width: 600px;
-    margin: 0 auto;           /* horizontal centering only */
-    background: #fff;
-    border-radius: var(--radius);
-    box-shadow: 0 24px 60px rgba(40, 60, 45, 0.14);
-    padding: 26px 30px 22px;
-  }
-  @media (max-width: 520px) {
-    body { padding: 12px 10px; }
-    .card { padding: 20px 16px 18px; border-radius: 22px; }
-    .head h1 { font-size: 1.15rem; }
-    .step h2 { font-size: 1.08rem; }
-    .nav { flex-direction: column-reverse; }
-    .btn-ghost, .btn-primary { width: 100%; }
+    max-width: 580px;
+    margin: 0 auto;
+    background: var(--card);
+    border-radius: var(--r);
+    box-shadow: 0 1px 2px rgba(0,0,0,.04), 0 18px 50px rgba(30,50,35,.10);
+    padding: 30px 34px 26px;
   }
 
   /* Header + progress */
-  .head { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
-  .head h1 { font-size: 1.45rem; font-weight: 700; margin: 0; letter-spacing: -0.02em; }
-  .head .close { color: var(--muted); font-size: 1.4rem; line-height: 1; text-decoration: none; }
-  .progress-row { display: flex; align-items: center; gap: 12px; margin: 14px 0 4px; }
-  .rocket { font-size: 1.5rem; }
-  .track { flex: 1; height: 12px; background: #eef0f1; border-radius: 999px; overflow: hidden; }
-  .fill { height: 100%; width: 12%; background: var(--accent); border-radius: 999px; transition: width .45s cubic-bezier(.4,0,.2,1); }
-  .pct { font-weight: 600; color: var(--muted); font-size: .92rem; min-width: 42px; text-align: right; }
-  .step-label { color: var(--accent-dark); font-weight: 600; font-size: .82rem; letter-spacing: .03em; text-transform: uppercase; margin: 14px 0 2px; }
+  .head { display: flex; align-items: baseline; justify-content: space-between; }
+  .head h1 { font-size: 1.3rem; font-weight: 700; margin: 0; letter-spacing: -0.02em; transition: opacity .3s var(--ease); }
+  .step-count { color: var(--muted); font-size: .82rem; font-weight: 500; }
+  .track { height: 5px; background: var(--line); border-radius: 999px; overflow: hidden; margin: 16px 0 4px; }
+  .fill { height: 100%; width: 17%; background: var(--accent); border-radius: 999px; transition: width .5s var(--ease); }
 
   /* Steps */
-  .step { display: none; animation: pop .35s ease; }
+  .step { display: none; }
   .step.active { display: block; }
-  @keyframes pop { from { opacity: 0; transform: translateY(8px);} to { opacity: 1; transform: none; } }
-  .step h2 { font-size: 1.22rem; font-weight: 700; margin: 2px 0 4px; letter-spacing: -0.01em; }
-  .step .why { color: var(--muted); font-size: .9rem; margin: 0 0 16px; line-height: 1.45; }
+  @media (prefers-reduced-motion: no-preference) {
+    .step.active { animation: stepIn .42s var(--ease); }
+  }
+  @keyframes stepIn { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
 
-  .field { margin-bottom: 15px; }
-  label.q { display: block; font-weight: 600; font-size: .96rem; margin-bottom: 8px; }
+  .eyebrow { color: var(--accent-dark); font-weight: 600; font-size: .74rem; letter-spacing: .08em; text-transform: uppercase; margin: 20px 0 6px; }
+  .step h2 { font-size: 1.32rem; font-weight: 700; margin: 0 0 6px; letter-spacing: -0.02em; }
+  .step .why { color: var(--muted); font-size: .9rem; margin: 0 0 22px; }
+
+  .field { margin-bottom: 18px; }
+  label.q { display: block; font-weight: 600; font-size: .94rem; margin-bottom: 8px; }
   label.q .opt { color: var(--muted); font-weight: 400; font-size: .82rem; }
-  .hint { color: var(--muted); font-size: .82rem; margin: 4px 0 0; }
-  .req { color: var(--accent-dark); }
+  .hint { color: var(--muted); font-size: .82rem; margin: 5px 0 0; }
+  .req { color: var(--accent); }
 
-  input[type=text], input[type=email], input[type=tel], input[type=url], input[type=password], textarea, select {
+  input[type=text], input[type=email], input[type=tel], input[type=password], textarea, select {
     width: 100%;
     background: var(--field);
     border: 1.5px solid var(--field-line);
-    border-radius: var(--radius-sm);
+    border-radius: var(--rs);
     color: var(--ink);
     padding: 13px 15px;
-    font-size: .96rem;
+    font-size: .95rem;
     font-family: inherit;
-    transition: border-color .15s, background .15s;
+    transition: border-color .2s var(--ease), background .2s var(--ease), box-shadow .2s var(--ease);
   }
   textarea { min-height: 92px; resize: vertical; }
-  input:focus, textarea:focus, select:focus { outline: none; border-color: var(--accent); background: #fff; }
-  ::placeholder { color: #b3bbc2; }
+  input:focus, textarea:focus, select:focus {
+    outline: none; border-color: var(--accent); background: #fff;
+    box-shadow: 0 0 0 4px var(--accent-soft);
+  }
+  ::placeholder { color: #aab2ac; }
 
-  /* Pill option selectors (radio / checkbox) */
+  /* Option selectors */
   .options { display: flex; flex-wrap: wrap; gap: 10px; }
   .options.col { flex-direction: column; }
   .option {
-    position: relative;
-    display: flex; align-items: center; gap: 10px;
-    background: var(--field);
-    border: 1.5px solid var(--field-line);
-    border-radius: var(--radius-sm);
-    padding: 12px 16px;
-    cursor: pointer;
-    font-size: .93rem;
-    font-weight: 500;
-    transition: all .15s;
-    flex: 1 1 auto;
+    position: relative; display: flex; align-items: center; gap: 11px;
+    background: var(--field); border: 1.5px solid var(--field-line); border-radius: var(--rs);
+    padding: 13px 16px; cursor: pointer; font-size: .92rem; font-weight: 500;
+    flex: 1 1 auto; transition: border-color .18s var(--ease), background .18s var(--ease), transform .12s var(--ease);
   }
+  .option:hover { border-color: #cfd6d0; }
+  .option:active { transform: scale(.99); }
   .options.col .option { flex: 1 1 100%; }
   .option input { position: absolute; opacity: 0; pointer-events: none; }
   .option .dot {
-    width: 20px; height: 20px; border-radius: 50%;
-    border: 2px solid #cfd6d2; flex: none;
-    display: inline-flex; align-items: center; justify-content: center;
-    transition: all .15s;
+    width: 19px; height: 19px; border-radius: 50%; border: 2px solid #c5ccc7; flex: none;
+    display: inline-flex; align-items: center; justify-content: center; transition: all .18s var(--ease);
   }
   .option.check .dot { border-radius: 6px; }
   .option:has(input:checked) { border-color: var(--accent); background: var(--accent-soft); color: var(--accent-dark); }
   .option:has(input:checked) .dot { border-color: var(--accent); background: var(--accent); }
-  .option:has(input:checked) .dot::after { content: ""; width: 8px; height: 8px; border-radius: 50%; background: #fff; }
+  .option:has(input:checked) .dot::after { content: ""; width: 7px; height: 7px; border-radius: 50%; background: #fff; }
   .option.check:has(input:checked) .dot::after {
     content: ""; width: 5px; height: 9px; border-radius: 0; background: transparent;
-    border: solid #fff; border-width: 0 2.5px 2.5px 0; transform: rotate(45deg) translateY(-1px);
+    border: solid #fff; border-width: 0 2px 2px 0; transform: rotate(45deg) translateY(-1px);
   }
 
-  /* Disclaimer / info boxes */
   .info {
-    background: var(--accent-soft);
-    border: 1px solid #d6e8dc;
-    border-radius: var(--radius-sm);
-    padding: 14px 16px;
-    font-size: .87rem;
-    color: #41624e;
-    line-height: 1.5;
-    margin-bottom: 18px;
+    background: var(--accent-soft); border: 1px solid #d8e8de; border-radius: var(--rs);
+    padding: 13px 16px; font-size: .86rem; color: #3f5e4a; margin-bottom: 20px;
   }
   .info b { color: var(--accent-dark); }
   .warn {
-    background: #fdf1ee; border: 1px solid #f6d8d0; color: #9c4a37;
-    border-radius: var(--radius-sm); padding: 12px 15px; font-size: .84rem; margin-top: 6px; line-height: 1.5;
+    background: #faf2ef; border: 1px solid #f0ddd5; color: #92503c; border-radius: var(--rs);
+    padding: 12px 15px; font-size: .83rem; margin-top: 8px;
   }
+
   .conditional { display: none; }
-  .conditional.show { display: block; animation: pop .3s ease; }
+  .conditional.show { display: block; }
+  @media (prefers-reduced-motion: no-preference) {
+    .conditional.show { animation: stepIn .3s var(--ease); }
+  }
 
   /* Nav */
-  .nav { display: flex; gap: 12px; margin-top: 26px; }
+  .nav { display: flex; gap: 12px; margin-top: 28px; }
   button { font-family: inherit; cursor: pointer; }
   .btn {
-    border: none; border-radius: 999px; padding: 14px 26px; font-size: .98rem; font-weight: 600;
-    transition: transform .12s, background .15s, box-shadow .15s;
+    border: none; border-radius: var(--rs); padding: 14px 26px; font-size: .96rem; font-weight: 600;
+    transition: background .18s var(--ease), transform .12s var(--ease), box-shadow .18s var(--ease);
   }
-  .btn:active { transform: scale(.97); }
-  .btn-primary { background: var(--accent); color: #fff; flex: 1; box-shadow: 0 8px 20px rgba(111,158,125,.35); }
-  .btn-primary:hover { background: var(--accent-dark); }
-  .btn-primary:disabled { opacity: .55; box-shadow: none; cursor: not-allowed; }
+  .btn:active { transform: translateY(1px); }
+  .btn-primary { background: var(--accent); color: #fff; flex: 1; box-shadow: 0 6px 16px rgba(95,144,112,.28); }
+  .btn-primary:hover { background: var(--accent-dark); box-shadow: 0 8px 20px rgba(95,144,112,.34); }
+  .btn-primary:disabled { opacity: .5; box-shadow: none; cursor: not-allowed; }
   .btn-ghost { background: #fff; color: var(--ink); border: 1.5px solid var(--line); }
-  .btn-ghost:hover { background: #f7f8f9; }
-  .hp { position: absolute; left: -9999px; }
-  #status { margin-top: 12px; font-size: .9rem; min-height: 20px; text-align: center; }
-  #status.err { color: var(--danger); }
+  .btn-ghost:hover { background: var(--field); }
 
-  .cf-wrap { margin-top: 16px; display: flex; justify-content: center; }
+  .hp { position: absolute; left: -9999px; }
+  #status { margin-top: 12px; font-size: .88rem; min-height: 18px; text-align: center; color: var(--muted); }
+  #status.err { color: var(--danger); }
+  .cf-wrap { margin-top: 18px; display: flex; justify-content: center; }
 
   /* Success */
-  .success { display: none; text-align: center; padding: 30px 10px 14px; }
-  .success .big { font-size: 3rem; }
-  .success h2 { color: var(--accent-dark); margin: 10px 0 6px; }
-  .success p { color: var(--muted); font-size: .95rem; }
+  .success { display: none; text-align: center; padding: 34px 12px 16px; }
+  .success.show { display: block; animation: stepIn .45s var(--ease); }
+  .success .tick {
+    width: 56px; height: 56px; border-radius: 50%; background: var(--accent-soft);
+    border: 2px solid var(--accent); margin: 0 auto 16px; position: relative;
+  }
+  .success .tick::after {
+    content: ""; position: absolute; left: 19px; top: 15px; width: 12px; height: 22px;
+    border: solid var(--accent); border-width: 0 3px 3px 0; transform: rotate(45deg);
+  }
+  .success h2 { margin: 0 0 6px; font-size: 1.3rem; }
+  .success p { color: var(--muted); font-size: .94rem; margin: 0; }
+
+  @media (max-width: 520px) {
+    body { padding: 12px 10px; }
+    .card { padding: 22px 18px 18px; border-radius: 16px; }
+    .head h1 { font-size: 1.12rem; }
+    .step h2 { font-size: 1.15rem; }
+    .nav { flex-direction: column-reverse; }
+    .btn-ghost, .btn-primary { width: 100%; }
+  }
 </style>
 </head>
 <body>
 <div class="card">
 
   <div class="head">
-    <h1 id="title">Hey, let's get you sorted! 🎉</h1>
-    <a href="#" class="close" title="Close" onclick="return false;">×</a>
+    <h1 id="title">Let's get you set up</h1>
+    <span class="step-count" id="count">Step 1 of 6</span>
   </div>
-
-  <div class="progress-row">
-    <span class="rocket">🚀</span>
-    <div class="track"><div class="fill" id="fill"></div></div>
-    <span class="pct" id="pct">12%</span>
-  </div>
+  <div class="track"><div class="fill" id="fill"></div></div>
 
   <form id="form" autocomplete="on" novalidate>
 
@@ -191,10 +191,10 @@
     </div>
 
     <!-- STEP 1 — Business basics -->
-    <section class="step active" data-title="🏢 Business basics">
-      <div class="step-label">Step 1 of 8</div>
-      <h2>🏢 Business basics</h2>
-      <p class="why">A clear, consistent business identity is what gets accounts approved. Tell us the essentials — no logo needed.</p>
+    <section class="step active" data-key="business">
+      <div class="eyebrow">Business</div>
+      <h2>Business basics</h2>
+      <p class="why">A clear, consistent business identity is what gets accounts approved.</p>
 
       <div class="field">
         <label class="q">Your business name <span class="req">*</span></label>
@@ -202,9 +202,21 @@
       </div>
 
       <div class="field">
+        <label class="q">Website URL <span class="req">*</span></label>
+        <input type="text" name="domain" placeholder="yourstore.com" required />
+        <p class="hint">Just the address — with or without https is fine.</p>
+      </div>
+
+      <div class="field">
+        <label class="q">WhatsApp number <span class="req">*</span></label>
+        <input type="tel" name="whatsapp" placeholder="+1 555 000 0000" required />
+        <p class="hint">A personal number where we can reach you directly.</p>
+      </div>
+
+      <div class="field">
         <label class="q">Which country do you primarily serve? <span class="req">*</span></label>
         <select name="country_served" id="country" required>
-          <option value="">Select a country…</option>
+          <option value="">Select a country</option>
           <option>United States</option>
           <option>United Kingdom</option>
           <option>Canada</option>
@@ -220,7 +232,7 @@
 
       <div class="field">
         <label class="q">Are you registered as a business in that country?</label>
-        <div class="options" id="reg-radios">
+        <div class="options">
           <label class="option"><input type="radio" name="registered_in_country" value="Yes" /><span class="dot"></span>Yes</label>
           <label class="option"><input type="radio" name="registered_in_country" value="No / not yet" /><span class="dot"></span>No / not yet</label>
           <label class="option"><input type="radio" name="registered_in_country" value="Not sure" /><span class="dot"></span>Not sure</label>
@@ -230,15 +242,14 @@
       <div class="field conditional" id="reg-number-wrap">
         <label class="q">Business registration number <span class="opt">(optional)</span></label>
         <input type="text" name="reg_number" placeholder="e.g., company / LLC registration no." />
-        <p class="hint">Only if you have it handy — helps us verify your identity faster.</p>
       </div>
     </section>
 
     <!-- STEP 2 — Address & phone -->
-    <section class="step" data-title="📍 Address & phone">
-      <div class="step-label">Step 2 of 8</div>
-      <h2>📍 Address &amp; phone</h2>
-      <p class="why">This must be real and match what's on your store and Merchant Center — mismatches get flagged.</p>
+    <section class="step" data-key="address">
+      <div class="eyebrow">Contact details</div>
+      <h2>Address &amp; phone</h2>
+      <p class="why">This must be real and match your store — mismatches get flagged.</p>
 
       <div class="field">
         <label class="q">Public business address <span class="req">*</span></label>
@@ -251,15 +262,15 @@
       </div>
       <div class="field">
         <label class="q">Business hours <span class="opt">(with timezone)</span></label>
-        <input type="text" name="hours" placeholder="e.g., Mon–Fri 9 AM – 5 PM EST" />
+        <input type="text" name="hours" placeholder="e.g., Mon-Fri 9 AM - 5 PM EST" />
       </div>
     </section>
 
     <!-- STEP 3 — Contact email -->
-    <section class="step" data-title="✉️ Contact email">
-      <div class="step-label">Step 3 of 8</div>
-      <h2>✉️ Contact email</h2>
-      <p class="why">One working customer email, used everywhere. Mixed addresses across your site are a red flag.</p>
+    <section class="step" data-key="email">
+      <div class="eyebrow">Contact details</div>
+      <h2>Contact email</h2>
+      <p class="why">One working customer email, used everywhere on your site.</p>
 
       <div class="field">
         <label class="q">Customer-facing email <span class="req">*</span></label>
@@ -275,10 +286,10 @@
     </section>
 
     <!-- STEP 4 — Policy pages -->
-    <section class="step" data-title="📄 Policy pages">
-      <div class="step-label">Step 4 of 8</div>
-      <h2>📄 Policy pages</h2>
-      <p class="why">Just tick which pages your site already has — no links needed.</p>
+    <section class="step" data-key="policy">
+      <div class="eyebrow">Policies</div>
+      <h2>Policy pages</h2>
+      <p class="why">Tick which pages your site already has — no links needed.</p>
 
       <div class="field">
         <label class="q">Which of these pages exist on your site?</label>
@@ -293,12 +304,12 @@
       </div>
 
       <div class="info">
-        ✍️ <b>What we'll do:</b> we'll tweak these policy pages for you — adding your business address and contact info to every page, with clear instructions. If we need to change the actual wording, <b>we'll send it to you for approval first</b>. Nothing goes live without your okay.
+        <b>What we'll do:</b> we'll tweak these policy pages for you — adding your business address and contact info to every page, with clear instructions. If we need to change the actual wording, <b>we'll send it to you for approval first</b>. Nothing goes live without your okay.
       </div>
 
       <div class="field">
         <label class="q">Real shipping details</label>
-        <textarea name="shipping_details" placeholder="Rates, carriers, regions served, delivery times (e.g., $15 standard / $30 express / free over $200)"></textarea>
+        <textarea name="shipping_details" placeholder="Rates, carriers, regions served, delivery times"></textarea>
       </div>
       <div class="field">
         <label class="q">Your actual return / refund policy</label>
@@ -307,29 +318,28 @@
 
       <div class="field">
         <label class="q">Privacy laws that may apply <span class="opt">(based on your country)</span></label>
-        <div class="options col" id="privacy-options"><!-- built from selected country --></div>
-        <textarea name="privacy_other" placeholder="Other regions you sell to, or anything specific — optional" style="margin-top:10px;"></textarea>
-        <p class="hint">Privacy requirements differ by country. We've pre-selected the likely ones — adjust as needed.</p>
+        <div class="options col" id="privacy-options"></div>
+        <textarea name="privacy_other" placeholder="Other regions you sell to, or anything specific - optional" style="margin-top:10px;"></textarea>
       </div>
     </section>
 
-    <!-- STEP 5 — Product names / eligibility -->
-    <section class="step" data-title="🏷️ Product names">
-      <div class="step-label">Step 5 of 8</div>
-      <h2>🏷️ Product names &amp; eligibility</h2>
-      <p class="why">Some product names simply can't be advertised and will always be rejected. Here's how we'd like to handle them.</p>
+    <!-- STEP 5 — Product names -->
+    <section class="step" data-key="products">
+      <div class="eyebrow">Products</div>
+      <h2>Product names &amp; eligibility</h2>
+      <p class="why">Some product names can't be advertised at all and will always be rejected.</p>
 
       <div class="field">
         <label class="q">Are you OK if we rename the non-eligible products and give them new, safe URLs?</label>
         <p class="hint" style="margin:0 0 8px;">Some names can't run at all, so we'd switch them to compliant alternatives.</p>
         <div class="options">
-          <label class="option"><input type="radio" name="rename_ok" value="Yes — rename + new URLs" /><span class="dot"></span>Yes, go ahead</label>
+          <label class="option"><input type="radio" name="rename_ok" value="Yes - rename + new URLs" /><span class="dot"></span>Yes, go ahead</label>
           <label class="option"><input type="radio" name="rename_ok" value="No" /><span class="dot"></span>No</label>
         </div>
       </div>
 
       <div class="conditional" id="rename-yes">
-        <div class="info">🙌 Perfect — we'll take care of the renaming and new URLs for you. That's all we need here.</div>
+        <div class="info">Perfect — we'll take care of the renaming and new URLs for you. That's all we need here.</div>
       </div>
 
       <div class="conditional field" id="rename-no">
@@ -342,72 +352,16 @@
       </div>
     </section>
 
-    <!-- STEP 6 — Research-use framing -->
-    <section class="step" data-title="🔬 Research-use framing">
-      <div class="step-label">Step 6 of 8</div>
-      <h2>🔬 Research-use framing</h2>
-      <p class="why">Your store's framing must stay consistent — no human-use or health-benefit claims.</p>
-
-      <div class="field">
-        <label class="q">Do you have a clear "Research Use Only / Not for Human Consumption" disclaimer?</label>
-        <div class="options">
-          <label class="option"><input type="radio" name="research_disclaimer" value="Yes" /><span class="dot"></span>Yes</label>
-          <label class="option"><input type="radio" name="research_disclaimer" value="No" /><span class="dot"></span>No</label>
-        </div>
-      </div>
-      <div class="field">
-        <label class="q">Does any copy on your site imply human use, dosing, or health benefits?</label>
-        <div class="options">
-          <label class="option"><input type="radio" name="human_use_copy" value="Yes" /><span class="dot"></span>Yes</label>
-          <label class="option"><input type="radio" name="human_use_copy" value="No" /><span class="dot"></span>No</label>
-          <label class="option"><input type="radio" name="human_use_copy" value="Not sure" /><span class="dot"></span>Not sure</label>
-        </div>
-      </div>
-    </section>
-
-    <!-- STEP 7 — Trust & social -->
-    <section class="step" data-title="⭐ Trust & social">
-      <div class="step-label">Step 7 of 8</div>
-      <h2>⭐ Trust &amp; social</h2>
-      <p class="why">Trust signals reassure both customers and reviewers that you're legit.</p>
-
-      <div class="field">
-        <label class="q">Which trust signals are on your site?</label>
-        <div class="options col">
-          <label class="option check"><input type="checkbox" name="trust_signals" value="Customer reviews" /><span class="dot"></span>Customer reviews</label>
-          <label class="option check"><input type="checkbox" name="trust_signals" value="Trustpilot" /><span class="dot"></span>Trustpilot</label>
-          <label class="option check"><input type="checkbox" name="trust_signals" value="Trust / security badges" /><span class="dot"></span>Trust / security badges</label>
-          <label class="option check"><input type="checkbox" name="trust_signals" value="SSL / secure checkout" /><span class="dot"></span>SSL / secure checkout</label>
-          <label class="option check"><input type="checkbox" name="trust_signals" value="None yet" /><span class="dot"></span>None yet</label>
-        </div>
-      </div>
-
-      <div class="field">
-        <label class="q">Do you have social media accounts?</label>
-        <div class="options">
-          <label class="option"><input type="radio" name="has_social" value="Yes" /><span class="dot"></span>Yes</label>
-          <label class="option"><input type="radio" name="has_social" value="No" /><span class="dot"></span>No</label>
-        </div>
-      </div>
-      <div class="field conditional" id="social-active">
-        <label class="q">Are they active / regularly working?</label>
-        <div class="options">
-          <label class="option"><input type="radio" name="social_active" value="Yes, active" /><span class="dot"></span>Yes, active</label>
-          <label class="option"><input type="radio" name="social_active" value="Not really" /><span class="dot"></span>Not really</label>
-        </div>
-      </div>
-    </section>
-
-    <!-- STEP 8 — Site access -->
-    <section class="step" data-title="🔑 Site access">
-      <div class="step-label">Step 8 of 8</div>
-      <h2>🔑 Site access</h2>
+    <!-- STEP 6 — Site access -->
+    <section class="step" data-key="access">
+      <div class="eyebrow">Access</div>
+      <h2>Site access</h2>
       <p class="why">To make and verify the fixes, we'll need admin access to your store.</p>
 
       <div class="field">
         <label class="q">Store platform <span class="req">*</span></label>
         <select name="platform" required>
-          <option value="">Select…</option>
+          <option value="">Select</option>
           <option>WooCommerce / WordPress</option>
           <option>Shopify</option>
           <option>BigCommerce</option>
@@ -416,55 +370,62 @@
           <option>Other</option>
         </select>
       </div>
-      <div class="field">
-        <label class="q">Store website URL <span class="req">*</span></label>
-        <input type="url" name="domain" placeholder="https://yourdomain.com" required />
-      </div>
-
-      <div class="info">🔐 We need <b>admin access</b> to make the fixes. Please share a login below.</div>
 
       <div class="field">
-        <label class="q">Admin username / email</label>
-        <input type="text" name="access_username" placeholder="Admin login username or email" autocomplete="off" />
+        <label class="q">Have you already provided us admin access?</label>
+        <div class="options">
+          <label class="option"><input type="radio" name="access_provided" value="Yes" /><span class="dot"></span>Yes</label>
+          <label class="option"><input type="radio" name="access_provided" value="No" /><span class="dot"></span>No, not yet</label>
+        </div>
       </div>
-      <div class="field">
-        <label class="q">Admin password</label>
-        <input type="password" name="access_password" placeholder="Admin password" autocomplete="off" />
-        <div class="warn">💡 Tip: for safety, create a <b>temporary admin/editor account</b> just for us — you can delete it the moment we're done. We only use it to fix your store.</div>
+
+      <div class="conditional" id="creds">
+        <div class="info">No problem — please share an admin login so we can get started.</div>
+        <div class="field">
+          <label class="q">Admin username / email</label>
+          <input type="text" name="access_username" placeholder="Admin login username or email" autocomplete="off" />
+        </div>
+        <div class="field">
+          <label class="q">Admin password</label>
+          <input type="password" name="access_password" placeholder="Admin password" autocomplete="off" />
+          <div class="warn">Tip: for safety, create a <b>temporary admin/editor account</b> just for us — you can delete it the moment we're done.</div>
+        </div>
       </div>
 
       <div class="field">
         <label class="q">Anything else we should know?</label>
-        <textarea name="notes" placeholder="Deadlines, prior agency work, special notes…"></textarea>
+        <textarea name="notes" placeholder="Deadlines, prior agency work, special notes"></textarea>
       </div>
 
       <div class="cf-wrap">
-        <div class="cf-turnstile" data-sitekey="YOUR_TURNSTILE_SITE_KEY"></div>
+        <div class="cf-turnstile" data-sitekey="1x00000000000000000000AA"></div>
       </div>
     </section>
 
     <div class="nav">
-      <button type="button" class="btn btn-ghost" id="backBtn" style="display:none;">← Back</button>
-      <button type="button" class="btn btn-primary" id="nextBtn">Continue →</button>
+      <button type="button" class="btn btn-ghost" id="backBtn" style="display:none;">Back</button>
+      <button type="button" class="btn btn-primary" id="nextBtn">Continue</button>
     </div>
     <div id="status" role="status" aria-live="polite"></div>
   </form>
 
   <div class="success" id="success">
-    <div class="big">🎉</div>
-    <h2>You're all set!</h2>
-    <p>Thanks — we've received everything. We'll review your store and email you the remediation plan and next steps.</p>
+    <div class="tick"></div>
+    <h2>You're all set</h2>
+    <p>Thanks — we've received everything. We'll review your store and reach out with the next steps.</p>
   </div>
 </div>
 
 <script>
-  // ====== CONFIG: set after deploying the Worker ======
+  // ====== CONFIG ======
   const SUBMIT_ENDPOINT = "https://YOUR-WORKER-SUBDOMAIN.workers.dev/submit";
-  // =====================================================
+  // TEST_MODE = true lets you preview the full flow without the Worker deployed.
+  // Set to false (and fill SUBMIT_ENDPOINT + a real Turnstile site key) before going live.
+  const TEST_MODE = true;
+  // =====================
 
-  // Privacy laws by country
   const PRIVACY = {
-    "United States": ["CCPA / CPRA (California residents)", "COPPA (users under 13)", "Other US state laws (VA, CO, CT…)"],
+    "United States": ["CCPA / CPRA (California residents)", "COPPA (users under 13)", "Other US state laws (VA, CO, CT...)"],
     "United Kingdom": ["UK GDPR", "Data Protection Act 2018", "PECR (cookies / marketing)"],
     "Canada": ["PIPEDA", "CASL (anti-spam)"],
     "Australia": ["Privacy Act 1988 / APPs", "Spam Act 2003"],
@@ -479,24 +440,24 @@
   const form = document.getElementById("form");
   const steps = Array.from(form.querySelectorAll(".step"));
   const fill = document.getElementById("fill");
-  const pct = document.getElementById("pct");
+  const countEl = document.getElementById("count");
+  const titleEl = document.getElementById("title");
   const backBtn = document.getElementById("backBtn");
   const nextBtn = document.getElementById("nextBtn");
   const statusEl = document.getElementById("status");
-  const titleEl = document.getElementById("title");
   let i = 0;
 
   function render() {
     steps.forEach((s, idx) => s.classList.toggle("active", idx === i));
     const p = Math.round(((i + 1) / steps.length) * 100);
     fill.style.width = p + "%";
-    pct.textContent = p + "%";
+    countEl.textContent = "Step " + (i + 1) + " of " + steps.length;
     backBtn.style.display = i === 0 ? "none" : "block";
-    nextBtn.textContent = i === steps.length - 1 ? "Submit ✨" : "Continue →";
+    nextBtn.textContent = i === steps.length - 1 ? "Submit" : "Continue";
     statusEl.textContent = "";
-    if (i === steps.length - 1) titleEl.textContent = "Last step — almost there! 🙌";
-    else if (i === 0) titleEl.textContent = "Hey, let's get you sorted! 🎉";
-    else titleEl.textContent = "Looking great — keep going! 👏";
+    if (i === steps.length - 1) titleEl.textContent = "Last step";
+    else if (i === 0) titleEl.textContent = "Let's get you set up";
+    else titleEl.textContent = "Looking good — keep going";
     window.scrollTo({ top: 0, behavior: "smooth" });
   }
 
@@ -504,35 +465,31 @@
     const active = steps[i];
     const fields = active.querySelectorAll("input[required], select[required], textarea[required]");
     for (const f of fields) {
-      if (f.offsetParent === null) continue; // skip hidden
+      if (f.offsetParent === null) continue;
       if (!f.checkValidity()) { f.reportValidity(); return false; }
     }
     return true;
   }
 
-  // --- Conditional logic ---
-  // Reg number shows only if registered = Yes
+  // Conditionals
   form.querySelectorAll('input[name="registered_in_country"]').forEach(r =>
-    r.addEventListener("change", () => {
-      document.getElementById("reg-number-wrap").classList.toggle("show", r.value === "Yes" && r.checked);
-    })
+    r.addEventListener("change", () =>
+      document.getElementById("reg-number-wrap").classList.toggle("show", r.value === "Yes" && r.checked)
+    )
   );
-  // Rename branching
   form.querySelectorAll('input[name="rename_ok"]').forEach(r =>
     r.addEventListener("change", () => {
-      const yes = form.querySelector('input[name="rename_ok"][value="Yes — rename + new URLs"]').checked;
+      const yes = form.querySelector('input[name="rename_ok"][value="Yes - rename + new URLs"]').checked;
       document.getElementById("rename-yes").classList.toggle("show", yes);
       document.getElementById("rename-no").classList.toggle("show", !yes);
     })
   );
-  // Social active shows only if has_social = Yes
-  form.querySelectorAll('input[name="has_social"]').forEach(r =>
-    r.addEventListener("change", () => {
-      document.getElementById("social-active").classList.toggle("show", r.value === "Yes" && r.checked);
-    })
+  form.querySelectorAll('input[name="access_provided"]').forEach(r =>
+    r.addEventListener("change", () =>
+      document.getElementById("creds").classList.toggle("show", r.value === "No" && r.checked)
+    )
   );
 
-  // Build privacy options from chosen country (rebuilt when step 4 opens)
   function buildPrivacy() {
     const country = document.getElementById("country").value;
     const box = document.getElementById("privacy-options");
@@ -545,7 +502,7 @@
     list.forEach(law => {
       const lbl = document.createElement("label");
       lbl.className = "option check";
-      lbl.innerHTML = '<input type="checkbox" name="privacy_flags" value="' + law + '" checked /><span class="dot"></span>' + law;
+      lbl.innerHTML = '<input type="checkbox" name="privacy_flags" value="' + law + '" /><span class="dot"></span>' + law;
       box.appendChild(lbl);
     });
   }
@@ -554,7 +511,7 @@
     if (!validateStep()) return;
     if (i < steps.length - 1) {
       i++;
-      if (steps[i].dataset.title.includes("Policy")) buildPrivacy();
+      if (steps[i].dataset.key === "policy") buildPrivacy();
       render();
     } else {
       submitForm();
@@ -575,10 +532,17 @@
     return data;
   }
 
+  function showSuccess() {
+    form.style.display = "none";
+    document.getElementById("success").classList.add("show");
+    titleEl.textContent = "All done";
+    countEl.textContent = "Complete";
+    fill.style.width = "100%";
+  }
+
   async function submitForm() {
-    if (form.elements["website_hp"] && form.elements["website_hp"].value) {
-      form.style.display = "none"; document.getElementById("success").style.display = "block"; return;
-    }
+    if (form.elements["website_hp"] && form.elements["website_hp"].value) { showSuccess(); return; }
+
     let token = "";
     if (window.turnstile && turnstile.getResponse) token = turnstile.getResponse() || "";
     else { const h = form.querySelector('input[name="cf-turnstile-response"]'); token = h ? h.value : ""; }
@@ -586,7 +550,9 @@
 
     nextBtn.disabled = true;
     statusEl.className = "";
-    statusEl.textContent = "Sending…";
+    statusEl.textContent = "Sending...";
+
+    if (TEST_MODE) { showSuccess(); return; }
 
     try {
       const res = await fetch(SUBMIT_ENDPOINT, {
@@ -595,13 +561,10 @@
         body: JSON.stringify({ submitted_at: new Date().toISOString(), turnstile_token: token, data: collect() })
       });
       if (!res.ok) throw new Error("HTTP " + res.status);
-      form.style.display = "none";
-      document.getElementById("success").style.display = "block";
-      titleEl.textContent = "All done! 🎉";
-      fill.style.width = "100%"; pct.textContent = "100%";
+      showSuccess();
     } catch (e) {
       statusEl.className = "err";
-      statusEl.textContent = "Something went wrong — please try again, or email us your answers.";
+      statusEl.textContent = "Something went wrong — please try again, or contact us directly.";
       nextBtn.disabled = false;
       if (window.turnstile && turnstile.reset) turnstile.reset();
     }
