@@ -49,8 +49,9 @@
 
   /* Header + progress */
   .brand { text-align: center; margin-bottom: 18px; }
-  .brand-logo { height: 72px; width: auto; max-width: 80%; object-fit: contain; }
-  @media (max-width: 520px) { .brand-logo { height: 56px; } }
+  .brand a { display: inline-block; line-height: 0; }
+  .brand-logo { height: 150px; width: auto; max-width: 100%; object-fit: contain; }
+  @media (max-width: 520px) { .brand-logo { height: 100px; } }
   .head { display: flex; align-items: baseline; justify-content: space-between; gap: 10px; }
   .head h1 { font-size: 1.3rem; font-weight: 700; margin: 0; letter-spacing: -0.02em; transition: opacity .3s var(--ease); }
   .step-count { color: var(--muted); font-size: .82rem; font-weight: 500; }
@@ -182,7 +183,9 @@
 <div class="card">
 
   <div class="brand">
-    <img src="https://www.rankbeta.com/wp-content/uploads/2026/06/Rankbeta-Logo-Upscaled.png" alt="Rankbeta" class="brand-logo" />
+    <a href="https://www.rankbeta.com" target="_blank" rel="noopener">
+      <img src="https://www.rankbeta.com/wp-content/uploads/2026/06/Rankbeta-Logo-Upscaled.png" alt="Rankbeta" class="brand-logo" />
+    </a>
   </div>
   <div class="head">
     <h1>Google Merchant Onboarding</h1>
