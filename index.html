@@ -4,7 +4,7 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <meta name="robots" content="noindex, nofollow" />
-<title>Client Onboarding</title>
+<title>Google Merchant Onboarding</title>
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
@@ -48,7 +48,9 @@
   }
 
   /* Header + progress */
-  .head { display: flex; align-items: baseline; justify-content: space-between; }
+  .brand { text-align: center; margin-bottom: 14px; }
+  .brand-logo { height: 38px; width: auto; max-width: 72%; object-fit: contain; }
+  .head { display: flex; align-items: baseline; justify-content: space-between; gap: 10px; }
   .head h1 { font-size: 1.3rem; font-weight: 700; margin: 0; letter-spacing: -0.02em; transition: opacity .3s var(--ease); }
   .step-count { color: var(--muted); font-size: .82rem; font-weight: 500; }
   .track { height: 5px; background: var(--line); border-radius: 999px; overflow: hidden; margin: 16px 0 4px; }
@@ -178,8 +180,11 @@
 <body>
 <div class="card">
 
+  <div class="brand">
+    <img src="https://www.rankbeta.com/wp-content/uploads/2026/06/Rankbeta-Logo-Upscaled.png" alt="Rankbeta" class="brand-logo" />
+  </div>
   <div class="head">
-    <h1 id="title">Let's get you set up</h1>
+    <h1>Google Merchant Onboarding</h1>
     <span class="step-count" id="count">Step 1 of 6</span>
   </div>
   <div class="track"><div class="fill" id="fill"></div></div>
@@ -208,8 +213,8 @@
       </div>
 
       <div class="field">
-        <label class="q">WhatsApp number <span class="req">*</span></label>
-        <input type="tel" name="whatsapp" placeholder="+1 555 000 0000" required />
+        <label class="q">WhatsApp number <span class="opt">(optional)</span></label>
+        <input type="tel" name="whatsapp" placeholder="+1 555 000 0000" />
         <p class="hint">A personal number where we can reach you directly.</p>
       </div>
 
@@ -458,9 +463,6 @@
     backBtn.style.display = i === 0 ? "none" : "block";
     nextBtn.textContent = i === steps.length - 1 ? "Submit" : "Continue";
     statusEl.textContent = "";
-    if (i === steps.length - 1) titleEl.textContent = "Last step";
-    else if (i === 0) titleEl.textContent = "Let's get you set up";
-    else titleEl.textContent = "Looking good — keep going";
     window.scrollTo({ top: 0, behavior: "smooth" });
   }
 
@@ -538,7 +540,6 @@
   function showSuccess() {
     form.style.display = "none";
     document.getElementById("success").classList.add("show");
-    titleEl.textContent = "All done";
     countEl.textContent = "Complete";
     fill.style.width = "100%";
   }
